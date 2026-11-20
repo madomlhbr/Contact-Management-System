@@ -4,7 +4,11 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from contact_gui import ContactDashboard
+from importlib import import_module
+import sys
+_gui = import_module("[BuenoMalhabour]_MSYS30A_FinalProject_contact gui")
+sys.modules["contact_gui"] = _gui  # Keep existing mock.patch targets usable.
+ContactDashboard = _gui.ContactDashboard
 
 
 class GuiSmokeTests(unittest.TestCase):

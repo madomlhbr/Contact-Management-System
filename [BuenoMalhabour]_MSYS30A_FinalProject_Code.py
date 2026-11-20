@@ -1096,7 +1096,8 @@ def main():
     args = parser.parse_args()
     if args.gui:
         try:
-            from contact_gui import launch_gui
+            from importlib import import_module
+            launch_gui = import_module("[BuenoMalhabour]_MSYS30A_FinalProject_contact gui").launch_gui
             launch_gui(args.data, demo=args.gui_demo)
         except (ImportError, RuntimeError) as exc:
             parser.exit(2, f"Cannot launch GUI: {exc}\nInstall Python with Tkinter and use a desktop display.\n")

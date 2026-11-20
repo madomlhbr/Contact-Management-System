@@ -17,10 +17,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y xvfb python3-tk
       - name: Compile modules
-        run: python -m py_compile MSYS30_External_Relations_Contact_System.py contact_gui.py test_gui.py
+        run: |
+          python -m py_compile "[BuenoMalhabour]_MSYS30A_FinalProject_Code.py" "[BuenoMalhabour]_MSYS30A_FinalProject_contact gui.py" "[BuenoMalhabour]_MSYS30A_FinalProject_test_gui.py"
       - name: Core unit tests
-        run: python MSYS30_External_Relations_Contact_System.py --self-test
+        run: python "[BuenoMalhabour]_MSYS30A_FinalProject_Code.py" --self-test
       - name: GUI smoke tests
-        run: xvfb-run -a python -m unittest -v test_gui.py
+        run: xvfb-run -a python "[BuenoMalhabour]_MSYS30A_FinalProject_test_gui.py"
       - name: Console demo smoke test
-        run: python MSYS30_External_Relations_Contact_System.py --demo
+        run: python "[BuenoMalhabour]_MSYS30A_FinalProject_Code.py" --demo

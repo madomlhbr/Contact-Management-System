@@ -10,9 +10,15 @@ import tkinter as tk
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
-from MSYS30_External_Relations_Contact_System import (
-    ContactSystem, classify_industry, benchmark, normalize_company, seed_demo,
-)
+from importlib import import_module
+
+# Import the renamed main application module without changing file names.
+_core = import_module("[BuenoMalhabour]_MSYS30A_FinalProject_Code")
+ContactSystem = _core.ContactSystem
+classify_industry = _core.classify_industry
+benchmark = _core.benchmark
+normalize_company = _core.normalize_company
+seed_demo = _core.seed_demo
 
 # Color swatches supplied for the final project: navy, plum, mauve, coral, peach.
 NAVY = '#0e3b5c'
