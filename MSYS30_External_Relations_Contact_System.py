@@ -17,6 +17,8 @@ SUPPORTING ALGORITHMS FROM THE ORIGINAL PROPOSAL:
 
 Standard library only. No real contact information is bundled.
 Usage:
+  python MSYS30_External_Relations_Contact_System.py --gui
+  python MSYS30_External_Relations_Contact_System.py --gui --gui-demo
   python MSYS30_External_Relations_Contact_System.py --demo
   python MSYS30_External_Relations_Contact_System.py --self-test
   python MSYS30_External_Relations_Contact_System.py --benchmark
@@ -1110,14 +1112,24 @@ class ContactSystemTests(unittest.TestCase):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     mode = parser.add_mutually_exclusive_group()
-    mode.add_argument("--demo", action="store_true", help="Run a safe demo using fictional records")
+    mode.add_argument("--gui", action="store_true", help="Open themed desktop interface (Tkinter)")
+    mode.add_argument("--demo", action="store_true", help="Run a safe console demo using fictional records")
     mode.add_argument("--self-test", action="store_true", help="Run the embedded unit/integration tests")
     mode.add_argument("--benchmark", action="store_true", help="Compare five sorting algorithms")
     mode.add_argument("--benchmark-search", action="store_true", help="Compare searching operations")
     parser.add_argument("--data", default="contact_records.json", help="JSON file for interactive persistence")
     parser.add_argument("--benchmark-csv", default=None, help="Optional output CSV for --benchmark")
+    parser.add_argument("--gui-demo", action="store_true", help="Seed fictional demo contacts in --gui mode")
     args = parser.parse_args()
-    if args.demo:
+    if args.gui:
+        try:
+            from contact_gui import launch_gui
+            launch_gui(args.data, demo=args.gui_demo)
+        except (ImportError, RuntimeError) as exc:
+            parser.exit(2, f"Cannot launch GUI: {exc}\nInstall Python with Tkinter and use a desktop display.\n")
+    elif args.gui_demo:
+        parser.error("--gui-demo must be combined with --gui")
+    elif args.demo:
         run_demo()
     elif args.self_test:
         result = unittest.TextTestRunner(verbosity=2).run(

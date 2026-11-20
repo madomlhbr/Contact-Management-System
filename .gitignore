@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+*.log
+contact_records.json
+demo_contacts.json
+*.tmp
+.DS_Store
+.venv/
+venv/

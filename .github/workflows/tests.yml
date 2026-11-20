@@ -1,0 +1,26 @@
+name: Python contact-system tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install virtual display / Tkinter
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb python3-tk
+      - name: Compile modules
+        run: python -m py_compile MSYS30_External_Relations_Contact_System.py contact_gui.py test_gui.py
+      - name: Core unit tests
+        run: python MSYS30_External_Relations_Contact_System.py --self-test
+      - name: GUI smoke tests
+        run: xvfb-run -a python -m unittest -v test_gui.py
+      - name: Console demo smoke test
+        run: python MSYS30_External_Relations_Contact_System.py --demo
