@@ -24,30 +24,30 @@ MSYS 30 - Data Structures and Algorithms \| SY 2026-2027, Semester 1
 
 Structured in the formal cover-and-section format of the supplied BADBytes Final Deliverable; contents reflect the MSYS 30 project specifications rather than copying MSYS 41 deliverable requirements.
 
-| **Report Section**                                          | **Section** |
+| **Report Section**                                          | **Page** |
 |-------------------------------------------------------------|----------|
-| Abstract and Keywords                                       | — |
-| I. Background and Problem Statement                         | — |
-| II\. Objectives and Scope                                   | — |
-| III\. Functional and Non-Functional Requirements            | — |
-| IV\. System Design and Data Structures                      | — |
-| V. Algorithms and Correctness                               | — |
-| VI\. Implementation and User Walkthrough                    | — |
-| VII\. Testing Procedures and Results                        | — |
-| VIII\. Complexity and Performance Analysis                  | — |
-| IX\. Design Trade-offs, Limitations and Future Enhancements | — |
-| X. Conclusion                                               | — |
-| References                                                  | — |
-| Appendix A. Execution Guide                                 | 11       |
-| Appendix B. Demonstration Plan                              | 11       |
+| Abstract and Keywords                                       | 3        |
+| I. Background and Problem Statement                         | 3        |
+| II\. Objectives and Scope                                   | 3        |
+| III\. Functional and Non-Functional Requirements            | 4        |
+| IV\. System Design and Data Structures                      | 5        |
+| V. Algorithms and Correctness                               | 6        |
+| VI\. Implementation and User Walkthrough                    | 7        |
+| VII\. Testing Procedures and Results                        | 8        |
+| VIII\. Complexity and Performance Analysis                  | 9        |
+| IX\. Design Trade-offs, Limitations and Future Enhancements | 11       |
+| X. Conclusion                                               | 11       |
+| References                                                  | 11       |
+| Appendix A. Execution Guide                                 | 12       |
+| Appendix B. Demonstration Plan                              | 12       |
 
-Deliverable files: a runnable .py program; this report (.docx and .pdf); a fictional sample CSV; and measured benchmark results (CSV).
+Deliverables: Python program and Tkinter UI, report (DOCX/PDF), presentation (PPTX/PDF), fictional sample CSV, and benchmark results.
 
 Privacy note: All bundled demonstration company/person names and e-mail addresses are fictional. The GDG workbook mentioned in Coding Assignment 2 was not provided as input to this final build.
 
 # Abstract and Keywords
 
-This project implements a desktop-accessible external-relations contact management system for an organization whose company and contact records may contain inconsistent industry labels, repeated company names, and incomplete data. The Python application and five-color Tkinter desktop interface provide record addition, editing, deletion, viewing, sorted listings, exact and keyword searches, industry grouping, duplicate-review reports, one-step undo, CSV import/export, and JSON persistence. It explicitly retains the singly linked FIFO request queue and array-backed LIFO undo stack from Coding Assignment 2. Two primary algorithms are added: stable recursive merge sort for ordering and duplicate detection, and binary search (iterative and recursive) for exact normalized company lookup. Supporting algorithms from the original project proposal include linear search, quicksort, and three elementary sorting baselines for comparison. Thirty-one automated tests (28 core and 3 graphical-interface smoke tests) passed, and deterministic experiments compare sorting operations and search effort. The resulting system demonstrates how elementary data structures and algorithms can improve organization and retrieval while keeping ambiguous classifications and duplicate flags subject to human review.
+This project implements an external-relations contact management system for an organization whose company and contact records may contain inconsistent industry labels, repeated company names, and incomplete data. The Python desktop and console application provides record addition, editing, deletion, viewing, sorted listings, exact and keyword searches, industry grouping, duplicate-review reports, one-step undo, CSV import/export, and JSON persistence. It explicitly retains the singly linked FIFO request queue and array-backed LIFO undo stack from Coding Assignment 2. Two primary algorithms are added: stable recursive merge sort for ordering and duplicate detection, and binary search (iterative and recursive) for exact normalized company lookup. Supporting algorithms from the original project proposal include linear search, quicksort, and three elementary sorting baselines for comparison. Thirty-one automated tests (28 core and 3 interface smoke tests) passed, and deterministic experiments compare sorting operations and search effort. The resulting system demonstrates how elementary data structures and algorithms can improve organization and retrieval while keeping ambiguous classifications and duplicate flags subject to human review.
 
 Keywords: data structures; algorithms; merge sort; binary search; FIFO queue; stack; CRM; industry taxonomy; duplicate detection; contact management.
 
@@ -81,36 +81,36 @@ Scope boundary. ContactFlow is a local, single-user Python information-system pr
 
 # III. Functional and Non-Functional Requirements
 
-The requirements in Table 1 translate the proposed features into observable functionality. A desktop graphical interface was added to improve usability while preserving the console option for reproducing algorithm measurements.
+The requirements in Table 1 translate the proposed features into observable functionality. A Tkinter desktop interface was chosen to improve usability; the console interface remains available for algorithm demonstrations.
 
-| **ID** | **Required behavior**                       | **Implementation / demonstration**                                       |
-|--------|---------------------------------------------|--------------------------------------------------------------------------|
-| FR-01  | Create, edit, delete, view company contacts | Dashboard forms and console options 1–4; FIFO request processing        |
-| FR-02  | Sort by multiple fields, both directions    | merge_sort()/quick_sort(); company/contact/industry/email                |
-| FR-03  | Exact and keyword search                    | exact_search() with cached index; keyword_search()                       |
-| FR-04  | Normalize labels and group by industry      | classify_industry(), industry_groups(), review_flags()                   |
-| FR-05  | Flag possible duplicates                    | duplicate_groups(): stable sort + adjacent comparisons                   |
-| FR-06  | Reversible updates                          | UndoStack and undo() for last completed add/edit/delete                  |
-| FR-07  | Batch I/O and persistence                   | import_csv(), export_csv(), save_json(), load_json()                     |
-| FR-08  | Robust invalid-input behavior               | Required fields/email checks, missing-ID handling, atomic CSV validation |
-| FR-09  | Performance evaluation                      | --benchmark, --benchmark-search; five sorter comparisons                 |
+| **ID** | **Required behavior**                       | **Implementation / demonstration**                                                  |
+|--------|---------------------------------------------|-------------------------------------------------------------------------------------|
+| FR-01  | Create, edit, delete, view company contacts | Tkinter forms, selected-row edit/delete, FIFO request processing; CLI also provided |
+| FR-02  | Sort by multiple fields, both directions    | merge_sort()/quick_sort(); company/contact/industry/email                           |
+| FR-03  | Exact and keyword search                    | exact_search() with cached index; keyword_search()                                  |
+| FR-04  | Normalize labels and group by industry      | classify_industry(), industry_groups(), review_flags()                              |
+| FR-05  | Flag possible duplicates                    | duplicate_groups(): stable sort + adjacent comparisons                              |
+| FR-06  | Reversible updates                          | UndoStack and undo() for last completed add/edit/delete                             |
+| FR-07  | Batch I/O and persistence                   | import_csv(), export_csv(), save_json(), load_json()                                |
+| FR-08  | Robust invalid-input behavior               | Required fields/email checks, missing-ID handling, atomic CSV validation            |
+| FR-09  | Performance evaluation                      | --benchmark, --benchmark-search; five sorter comparisons                            |
 
 Table 1. Functional requirements and implementation mapping.
 
-| **ID** | **Quality attribute** | **Design decision / evidence**                                                       |
-|--------|-----------------------|--------------------------------------------------------------------------------------|
-| NFR-01 | Correctness           | 28 core automated tests and 3 Tkinter GUI smoke tests              |
-| NFR-02 | Efficiency            | O(n log n) merge sort; warm-cache O(log n + k) lookup, benchmarks                    |
-| NFR-03 | Maintainability       | Modular classes/functions, docstrings, comments, Python standard library             |
-| NFR-04 | Data integrity        | Human-review flags for unclear labels; no automatic deletion of suspected duplicates |
-| NFR-05 | Usability             | Tkinter dashboard, modal validation, numbered CLI, safe demo, help flags                    |
-| NFR-06 | Reproducibility       | Fixed synthetic sample records and seeded benchmark inputs                           |
+| **ID** | **Quality attribute** | **Design decision / evidence**                                                             |
+|--------|-----------------------|--------------------------------------------------------------------------------------------|
+| NFR-01 | Correctness           | 28 core tests plus 3 Tkinter GUI smoke tests; all passed locally                           |
+| NFR-02 | Efficiency            | O(n log n) merge sort; warm-cache O(log n + k) lookup, benchmarks                          |
+| NFR-03 | Maintainability       | Modular classes/functions, docstrings, comments, Python standard library                   |
+| NFR-04 | Data integrity        | Human-review flags for unclear labels; no automatic deletion of suspected duplicates       |
+| NFR-05 | Usability             | Graphical directory, navigation sidebar, form validation, keyboard shortcuts, CLI fallback |
+| NFR-06 | Reproducibility       | Fixed synthetic sample records and seeded benchmark inputs                                 |
 
 Table 2. Non-functional goals aligned with the design, correctness and efficiency criteria in the course specifications \[2\].
 
 # IV. System Design and Data Structures
 
-**Architecture:** Input and Tkinter GUI → ContactSystem → list of records; edits pass through a linked FIFO request queue; inverse actions enter a LIFO undo stack; merge sort creates a cached company index for binary search; CSV and JSON handle file I/O.
+**Architecture:** GUI/CLI input and validation → ContactSystem → list of records. Linked FIFO queue stages changes, array-backed LIFO stack stores inverse actions, and merge sort creates a cached index for binary search.
 
 *Figure 1. System architecture and flow of committed changes.*
 
@@ -183,7 +183,7 @@ Users can launch ContactFlow as a Python 3 desktop application using --gui. The 
 
 Figure 2 illustrates the Tkinter dashboard using the five supplied color swatches: navy (#0E3B5C) for navigation, plum (#5E4F6D) for table headers, mauve (#9F6671) for highlighted information, coral (#D8897B) for primary actions, and peach (#F4AC7B) for accent details. A left navigation rail offers directory, industry, duplicate and classification views; the central work area shows summary counts, search controls, sortable records and queue management. Desktop keyboard shortcuts include Ctrl+N, Ctrl+F, Ctrl+S, Ctrl+Z and Delete.
 
-**Figure 2.** The desktop dashboard provides a navy navigation rail, contact statistics, search controls, sorting options, directory table, queue tab, and algorithm panel. See the downloadable PDF for the screenshot.
+![ContactFlow desktop dashboard](dashboard_screenshot.png)
 
 Figure 2. ContactFlow desktop dashboard with twelve synthetic records; screenshot captured during GUI testing.
 
@@ -261,7 +261,7 @@ Five algorithms sorted the same pseudorandom permutations of n=100, 300, and 600
 
 Table 6. Mean number of key comparisons across five seeded trials (lower is better).
 
-**Figure:** Benchmark comparison data are provided in `MSYS30_benchmark_results.csv`.
+**Benchmark data:** See `MSYS30_benchmark_results.csv` and the formatted PDF for graphs.
 
 *Figure 2. Sorting comparison growth on a logarithmic vertical scale.*
 
@@ -271,7 +271,7 @@ At n=600, merge sort used an average of 4,796 comparisons, quicksort approximate
 
 An ordered list of 10,000 distinct company keys was queried 1,000 times using successful exact searches. Binary search took 12,372 total key comparisons (mean 12.372), while the sequential scan took 4,892,500 comparisons (mean 4,892.5). The experiment tests warm searches and intentionally excludes the initial sorting/index-building cost; the full application pays that O(n log n) cost on the first search after a mutation.
 
-**Figure:** Binary-search and linear-search comparison details are discussed in the experiments and can be reproduced with `--benchmark-search`.
+**Search experiment:** See `--benchmark-search` and the PDF report for the chart.
 
 *Figure 3. Mean comparisons for 1,000 successful lookups on 10,000 sorted keys.*
 

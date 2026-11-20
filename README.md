@@ -80,6 +80,7 @@ python -m unittest -v test_gui.py
 - `PROJECT_REPORT.md` — formal project report readable directly on GitHub
 - `MSYS30_Final_Project_Paper.pdf` / `.docx` — formatted and editable versions of the paper
 - `PRESENTATION_GUIDE.md` — suggested 12–14 minute presentation/demo walkthrough
+- `MSYS30_ContactFlow_Presentation.pptx` / `.pdf` — 13-slide live-presentation deck
 
 ## Safety and limitations
 
