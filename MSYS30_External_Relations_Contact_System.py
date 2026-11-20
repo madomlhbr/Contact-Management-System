@@ -1,31 +1,4 @@
 #!/usr/bin/env python3
-"""MSYS 30 Final Project - External Relations Contact Management System.
-
-Prepared for: Dylan Bueno and Amado Malhabour
-Based on their submitted final-project proposal and Coding Assignment 2.
-
-REUSED FROM CODING ASSIGNMENT 2 (algorithm and data structures):
-  * FIFO request processing: enqueue at rear; dequeue/process oldest first.
-  * Singly linked RequestQueue and array-backed LIFO UndoStack.
-
-TWO NEW PRIMARY ALGORITHMS:
-  * Stable recursive MERGE SORT - alphabetical/industry sorting and duplicate report.
-  * BINARY SEARCH (iterative and recursive) - exact normalized company lookup.
-
-SUPPORTING ALGORITHMS FROM THE ORIGINAL PROPOSAL:
-  * Linear keyword search; quicksort; bubble, insertion, selection sort benchmarks.
-
-Standard library only. No real contact information is bundled.
-Usage:
-  python MSYS30_External_Relations_Contact_System.py --gui
-  python MSYS30_External_Relations_Contact_System.py --gui --gui-demo
-  python MSYS30_External_Relations_Contact_System.py --demo
-  python MSYS30_External_Relations_Contact_System.py --self-test
-  python MSYS30_External_Relations_Contact_System.py --benchmark
-  python MSYS30_External_Relations_Contact_System.py --data my_contacts.json
-  python MSYS30_External_Relations_Contact_System.py --help
-"""
-
 from __future__ import annotations
 
 import argparse

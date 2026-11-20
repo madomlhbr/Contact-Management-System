@@ -1,4 +1,3 @@
-"""Headless-safe smoke tests: run with xvfb-run on Linux or a desktop display."""
 import tempfile
 import tkinter as tk
 import unittest
