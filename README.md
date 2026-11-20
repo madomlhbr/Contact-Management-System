@@ -77,7 +77,8 @@ python -m unittest -v test_gui.py
 - `test_gui.py` — GUI smoke tests for search, CRUD queue, undo, persistence, and validation
 - `MSYS30_fictional_contacts_sample.csv` — synthetic test contacts only
 - `MSYS30_benchmark_results.csv` — captured example benchmark results; measured on one environment, not universal timings
-- `MSYS30_Final_Project_Paper.pdf` / `.docx` — formal submission paper and editable document
+- `PROJECT_REPORT.md` — formal project report readable directly on GitHub
+- `MSYS30_Final_Project_Paper.pdf` / `.docx` — formatted and editable versions of the paper
 - `PRESENTATION_GUIDE.md` — suggested 12–14 minute presentation/demo walkthrough
 
 ## Safety and limitations
